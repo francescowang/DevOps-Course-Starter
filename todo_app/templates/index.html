@@ -1,18 +1,53 @@
 {% extends "layout.html" %}
 {% block title %}To-Do App{% endblock %}
-
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
+<div class="header">
+    <h1 class="text-left" class="display-4" >What are you doing today?</h1>
+    <p class="lead">Click below to increase your productivity...</p>
+    <a class="btn btn-success btn-lg" href="https://bit.ly/3H6CCdV" role="button">YouTube</a>
+    <a class="btn btn-danger btn-lg" href="https://pomofocus.io/" role="button">Pomodoro Technique</a>
+    <a class="btn btn-info btn-lg" href="https://bit.ly/3n0ZhAc" role="button">Life Hacks</a>
+    <p></p>
+    <!-- adding a space -->
+    <h5 class="text-left" class="text-light" class="lead">Get things done or die trying</h5>
+</div>
+<ul class="list-group">
+    {% for item in items_jinja %}
+    <li class="list-group-item">
+        {{item.title}}
+        {% if item.status == "Unfinished" %}
+        <form class="float-end" method="POST" action="/delete/{{item.id}}">
+            <input type="submit"  name="delete" class="btn-secondary" value="🗑️">
+        </form>
+        <form class="float-end" method="POST" action="/completed/{{item.id}}">
+            <input type="submit" name="complete" class="btn-secondary" value="☑️" data-source="{{item.id}}">
+        </form>
+        <div align ="left">
+            <p style="color:red">Unfinished ❌</p>
+        </div>
+        {%endif%}
+        {% if item.status == "Completed" %}
+        <form class="float-end" method="POST" action="/delete/{{item.id}}">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
+        </form>
+        <form class="float-end" method="POST" action="/unfinished/{{item.id}}">
+            <input type="submit" name="to_do" class="btn-secondary" value="✅" data-source="{{item.id}}">
+        </form>
+        <div align ="left">
+            <p class="text-success">Completed ✅</p>
+        </div>
+        {%endif%}
+    </li>
+    {% endfor %}  
+</ul>
+<li<div class="container-fluid">
+    <form action="/add_task", method="POST" class="form-control">
+        <div class=" class="form-control> </div>
+            <div align ="left">
+                <input type="text" class="col-lg-4 col-lg-offset-10" name="item_name" id="item_id" class=form-control required>
+                <p></p> <!--adding a space-->
+                <input type="submit" name="add" class="btn btn-outline-info" value="ADD ➕">
+    </form>
     </div>
-  </div>
+    </li>
 {% endblock %}
