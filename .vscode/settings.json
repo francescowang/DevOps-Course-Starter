@@ -1,0 +1,12 @@
+{
+    "python.terminal.activateEnvironment": true,
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.defaultInterpreterPath": "./.venv/bin/python",
+    "python.formatting.blackPath": "black",
+    "editor.tabCompletion": "on",
+    "workbench.colorCustomizations": {
+        "terminal.foreground" : "#10d52b",
+        "terminal.background" : "#000000",
+    },
+    "python.formatting.provider": "black",
+}
