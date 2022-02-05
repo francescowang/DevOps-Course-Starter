@@ -16,7 +16,7 @@ def get_items():
     return session.get('items', _DEFAULT_ITEMS.copy())
 
 
-def get_item(id):
+def get_item(id): # remove code and add an API
     """
     Fetches the saved item with the specified ID.
 
@@ -30,7 +30,7 @@ def get_item(id):
     return next((item for item in items if item['id'] == int(id)), None)
 
 
-def add_item(title):
+def add_item(title):  # remove code and add an API
     """
     Adds a new item with the specified title to the session.
 
@@ -45,25 +45,31 @@ def add_item(title):
     # Determine the ID for the item based on that of the previously added item
     id = items[-1]['id'] + 1 if items else 0
 
-    item = { 'id': id, 'title': title, 'status': 'Not Started' }
+    item = { 'id': id, 'title': title, 'status': 'Unfinished' }
 
     # Add the item to the list
     items.append(item)
-    session['items'] = items
+    session['list_of_tasks'] = items
 
     return item
 
 
-def save_item(item):
+def save_item(task):  # remove code and add an API
     """
     Updates an existing item in the session. If no existing item matches the ID of the specified item, nothing is saved.
 
     Args:
         item: The item to save.
     """
-    existing_items = get_items()
-    updated_items = [item if item['id'] == existing_item['id'] else existing_item for existing_item in existing_items]
+    existing_tasks = get_items()
+    updated_tasks = [task if task['id'] == existing_task['id'] else existing_task for existing_task in existing_tasks]
 
-    session['items'] = updated_items
+    session['list_of_tasks'] = updated_tasks # 'list_of_tasks' can be any name as long as it makes sense
 
-    return item
+    return task
+
+def delete_item(task): # parameter  # remove code and add an API
+    items = get_items()
+    items.remove(task) # argument
+    session['list_of_tasks'] = items
+    return items
