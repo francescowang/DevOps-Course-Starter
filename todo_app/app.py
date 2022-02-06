@@ -1,21 +1,18 @@
 from flask import Flask, request, render_template, redirect, url_for
-from todo_app.data.session_items import get_items, add_item, delete_item, save_item, get_item
-
-
+from todo_app.data.session_items import get_items, get_item, add_item, delete_item, save_item
 from todo_app.flask_config import Config
 
+
 app = Flask(__name__)
+app.secret_key="WHY!"
 app.config.from_object(Config)
 
-# def get_status(item):
-#     return item['status']
 
 @app.route('/', methods=['GET'])
 def index():
     items = get_items()
-    items.sort(key=lambda get_status: get_status['status'], reverse=True) # 'status' is a key, look at session_items line 4
-    # items.sort(key=get_status, reverse=True)
-    return render_template('index.html', items_jinja=items) # line 15 in index.html
+    items.sort(key = lambda task: task['status'], reverse=True) # status refers to a key in session_items on line 4
+    return render_template('index.html', items_jinja=items) # items_jinja refers to index.html on line 15
 
 
 @app.route('/add_task', methods=['POST'])
