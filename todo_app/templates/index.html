@@ -14,7 +14,7 @@
     {% for item in items_jinja %}
     <li class="list-group-item">
         {{item.title}}
-        {% if item.status == "Unfinished" %}
+        {% if item.status == "Not Started" %}
         <form class="float-end" method="POST" action="/delete/{{item.id}}">
             <input type="submit" name="delete" class="btn-secondary" value="🗑️">
         </form>
@@ -22,14 +22,14 @@
             <input type="submit" name="complete" class="btn-secondary" value="✅" data-source="{{item.id}}">
         </form>
         <div align ="left">
-            <p style="color:red">Unfinished ❌</p>
+            <p style="color:red">Not Started ❌</p>
         </div>
         {%endif%}
         {% if item.status == "Completed" %}
         <form class="float-end" method="POST" action="/delete/{{item.id}}">
             <input type="submit" name="delete" class="btn-secondary" value="🗑️">
         </form>
-        <form class="float-end" method="POST" action="/unfinished/{{item.id}}">
+        <form class="float-end" method="POST" action="/not_started/{{item.id}}">
             <input type="submit" name="to_do" class="btn-secondary" value="❌" data-source="{{item.id}}">
         </form>
         <div align ="left">
