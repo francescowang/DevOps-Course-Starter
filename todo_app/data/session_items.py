@@ -1,10 +1,10 @@
 from flask import session
 
 _DEFAULT_ITEMS = [
-    { 'id': 1, 'status': 'Unfinished', 'title': 'Rest' },
-    { 'id': 2, 'status': 'Unfinished', 'title': 'Eat' },
-    { 'id': 3, 'status': 'Unfinished', 'title': 'Code' },
-    { 'id': 4, 'status': 'Unfinished', 'title': 'Gym' },
+    { 'id': 1, 'status': 'Not Started', 'title': 'Rest' },
+    { 'id': 2, 'status': 'Not Started', 'title': 'Eat' },
+    { 'id': 3, 'status': 'Not Started', 'title': 'Code' },
+    { 'id': 4, 'status': 'Not Started', 'title': 'Gym' },
 ]
 
 def get_items():
@@ -44,7 +44,7 @@ def add_item(title):
     tasks = get_items()
     # Determine the ID for the item based on that of the previously added item
     id = tasks[-1]['id'] + 1 if tasks else 0
-    task = { 'id': id, 'title': title, 'status': 'Unfinished' }
+    task = { 'id': id, 'title': title, 'status': 'Not Started' }
     # Add the item to the list
     tasks.append(task)
     session['tasks'] = tasks
