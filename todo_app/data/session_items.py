@@ -14,7 +14,7 @@ def get_items():
     Returns:
         list: The list of saved items.
     """
-    return session.get('items', _DEFAULT_ITEMS.copy())
+    return session.get('tasks', _DEFAULT_ITEMS.copy())
 
 
 def get_item(id):
@@ -47,7 +47,7 @@ def add_item(title):
     task = { 'id': id, 'title': title, 'status': 'Unfinished' }
     # Add the item to the list
     tasks.append(task)
-    session['items'] = tasks
+    session['tasks'] = tasks
     return task
 
 
@@ -60,11 +60,11 @@ def save_item(task):
     """
     existing_tasks = get_items()
     updated_tasks = [task if task['id'] == existing_task['id'] else existing_task for existing_task in existing_tasks]
-    session['list_of_tasks'] = updated_tasks # 'list_of_tasks' can be any name as long as it makes sense
+    session['tasks'] = updated_tasks # 'tasks' can be any name as long as it makes sense
     return task
 
 def delete_item(task): # parameter # remove code and add an API
-    items = get_items()
-    items.remove(task) # argument
-    session['list_of_tasks'] = items
-    return items
+    tasks = get_items()
+    tasks.remove(task) # argument
+    session['tasks'] = tasks
+    return tasks
