@@ -36,10 +36,10 @@ def mark_as_complete(item_id):
     return redirect(url_for('index'))
 
 
-@app.route('/unfinished/<item_id>', methods=['POST'])
+@app.route('/not_started/<item_id>', methods=['POST'])
 def mark_as_to_do(item_id):
     item = get_item(item_id)
-    item["status"] = "Unfinished"
+    item["status"] = "Not Started"
     save_item(task=item)
     return redirect(url_for('index'))
 
