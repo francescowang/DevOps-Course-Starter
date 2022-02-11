@@ -4,8 +4,8 @@ from todo_app.flask_config import Config
 
 
 app = Flask(__name__)
-app.secret_key="WHY!"
-app.config.from_object(Config)
+# app.secret_key="WHY!"
+app.config.from_object(Config())
 
 
 @app.route('/', methods=['GET'])
