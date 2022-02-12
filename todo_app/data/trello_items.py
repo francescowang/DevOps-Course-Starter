@@ -22,6 +22,30 @@ class Task:
         return cls(card["id"], card["name"], list_name)
 
 
-def get_cards():
-    pass
+def get_cards(list_name):
+    url_api = "https://api.trello.com/1/boards/{{board}}/lists?key={{key}}&token={{token}}&cards=open"
+    headers = {
+        "Accept": "application/json"
+    }
+    
+    response = requests.request(
+        "GET",
+        url=url_api,
+        headers=headers
+    )
+    
+    result = response.json()
+    
+    tasks = []
+    
+    for i in result:
+        if i["name"] == list_name:
+            for card in i["cards"]:
+                task = Task.from_trello_card(card, list_name)
+                
+                tasks.append(task)
+    return tasks
 
+
+def add_trello_task(title):
+    pass
