@@ -23,7 +23,7 @@ class Task:
 
 
 def get_cards(list_name):
-    url_api = "https://api.trello.com/1/boards/{{board}}/lists?key={{key}}&token={{token}}&cards=open"
+    url_api = f"https://api.trello.com/1/boards/{board}/lists?key={key}&token={token}&cards=open"
     headers = {
         "Accept": "application/json"
     }
@@ -38,9 +38,9 @@ def get_cards(list_name):
     
     tasks = []
     
-    for i in result:
-        if i["name"] == list_name:
-            for card in i["cards"]:
+    for a_list in result: # Not Started, Completed, Doing
+        if a_list["name"] == list_name:
+            for card in a_list["cards"]:
                 task = Task.from_trello_card(card, list_name)
                 
                 tasks.append(task)
@@ -49,3 +49,6 @@ def get_cards(list_name):
 
 def add_trello_task(title):
     pass
+
+card = get_cards("Not Started")
+print(card)
