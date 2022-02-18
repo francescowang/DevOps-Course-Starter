@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for
 from todo_app.data.session_items import get_items, get_item, add_item, delete_item, save_item
 from todo_app.flask_config import Config
+import todo_app.data.trello_items 
 
 
 app = Flask(__name__)
@@ -10,8 +11,8 @@ app.config.from_object(Config())
 
 @app.route('/', methods=['GET'])
 def index():
-    items = get_items()
-    items.sort(key = lambda task: task['status'], reverse=True) # status refers to a key in session_items on line 4
+    items = todo_app.data.trello_items.get_cards("Not Started")
+    items.sort(key = lambda task: task.status, reverse=True) # status refers to a key in session_items on line 4
     return render_template('index.html', items_jinja=items) # items_jinja refers to index.html on line 15
 
 
