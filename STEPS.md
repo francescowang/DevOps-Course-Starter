@@ -3,8 +3,8 @@
 **Module 1**
 
  - [ ] Clone the repository
- - [ ] Delete .git file
- - [ ] Initialise a new repository
+ - [ ] Delete .git file or run ```git remote remove origin``` to unlink from the original project
+ - [ ] Initialise a new repository if you deleted the .git file
  - [ ] If your default shell is zsh, change it to bash
  - [ ] Run these commands
 
