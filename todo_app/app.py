@@ -1,5 +1,12 @@
 from flask import Flask, request, render_template, redirect, url_for
-from todo_app.data.trello_items import *
+from todo_app.data.trello_items import (
+    get_cards,
+    add_trello_task,
+    delete_trello_task,
+    not_started_trello_task,
+    doing_trello_task,
+    completed_trello_task,
+)
 from todo_app.flask_config import Config
 
 
