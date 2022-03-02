@@ -32,7 +32,7 @@
 
 <!--Buttons-->
 <div class="header">
-    <h1 class="text-center" class="display-4">One To-Do app to rule them all</h1>
+    <h2 class="text-center" class="display-4">One To-Do app to rule them all</h2>
     <a class="btn btn-success btn-lg" href="https://bit.ly/3H6CCdV" role="button">YouTube</a>
     <a class="btn btn-danger btn-lg" href="https://pomofocus.io/" role="button">Pomodoro Technique</a>
     <a class="btn btn-info btn-lg" href="https://bit.ly/3n0ZhAc" role="button">Life Hacks</a>
@@ -40,22 +40,22 @@
 
 
 <!--Not Started Tasks-->
-<h2 class="text-center">NOT STARTED</h2>
+<h5 class="text-center">❌NOT STARTED❌</h5>
 <ul class="list-group">
     {% for a_list in not_started_tasks %}
     <li class="list-group-item">
         <h5>
         {{a_list.name}}
         <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
-            <input type="submit" name="delete" class="btn-secondary" value="delete">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
             <input type="hidden" name="delete_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/doing_task/{{a_list.id}}">
-            <input type="submit" name="doing" class="btn-secondary" value="doing" data-source="{{a_list.id}}">
+            <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{a_list.id}}">
             <input type="hidden" name="doing_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
-            <input type="submit" name="completed" class="btn-secondary" value="completed" data-source="{{a_list.id}}">
+            <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{a_list.id}}">
             <input type="hidden" name="complete_id" value="{{a_list.id}}">
         </form>
     </li>
@@ -64,22 +64,22 @@
 
 
 <!--Doing Tasks Here-->
-<h2 class="text-center">DOING</h2>
+<h5 class="text-center">👨‍💻DOING👨‍💻</h5>
 <ul class="list-group">
     {% for a_list in doing_tasks %}
     <li class="list-group-item">
         <h5>
         {{a_list.name}}
         <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
-            <input type="submit" name="delete" class="btn-secondary" value="delete">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
             <input type="hidden" name="delete_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/not_started_task/{{a_list.id}}">
-            <input type="submit" name="not started" class="btn-secondary" value="not started" data-source="{{a_list.id}}">
+            <input type="submit" name="not started" class="btn-secondary" value="❌" data-source="{{a_list.id}}">
             <input type="hidden" name="not_started_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
-            <input type="submit" name="completed" class="btn-secondary" value="completed" data-source="{{a_list.id}}">
+            <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{a_list.id}}">
             <input type="hidden" name="complete_id" value="{{a_list.id}}">
         </form>
     </li>
@@ -88,23 +88,23 @@
 
 
 <!--Completed Tasks Here-->
-<h2 class="text-center">COMPLETED</h2>
+<h5 class="text-center">✅COMPLETED✅</h5>
 <ul class="list-group">
     {% for a_list in completed_tasks %}
     <li class="list-group-item">
         <h5>
         {{a_list.name}}
         <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
-            <input type="submit" name="delete" class="btn-secondary" value="delete">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
             <input type="hidden" name="delete_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/not_started_task/{{a_list.id}}">
-            <input type="submit" name="not started" class="btn-secondary" value="not started" data-source="{{a_list.id}}">
+            <input type="submit" name="not started" class="btn-secondary" value="❌" data-source="{{a_list.id}}">
             <input type="hidden" name="not_started_id" value="{{a_list.id}}">
         </form>
-        <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
-            <input type="submit" name="completed" class="btn-secondary" value="completed" data-source="{{a_list.id}}">
-            <input type="hidden" name="complete_id" value="{{a_list.id}}">
+        <form class="float-end" method="POST" action="/doing_task/{{a_list.id}}">
+            <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{a_list.id}}">
+            <input type="hidden" name="doing_id" value="{{a_list.id}}">
         </form>
     </li>
 </ul>
