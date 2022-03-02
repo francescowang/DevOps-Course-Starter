@@ -44,17 +44,17 @@
     <li class="list-group-item">
         <h5>
         {{a_list.name}}
-        <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
-            <input type="submit" name="completed" class="btn-secondary" value="Completed" data-source="{{a_list.id}}">
-            <input type="hidden" name="complete_id" value="{{a_list.id}}">
-        </form>
         <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
-            <input type="submit" name="delete" class="btn-secondary" value="Delete">
+            <input type="submit" name="delete" class="btn-secondary" value="delete">
             <input type="hidden" name="delete_id" value="{{a_list.id}}">
         </form>
         <form class="float-end" method="POST" action="/doing_task/{{a_list.id}}">
-            <input type="submit" name="doing" class="btn-secondary" value="Doing" data-source="{{a_list.id}}">
+            <input type="submit" name="doing" class="btn-secondary" value="doing" data-source="{{a_list.id}}">
             <input type="hidden" name="doing_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
+            <input type="submit" name="completed" class="btn-secondary" value="completed" data-source="{{a_list.id}}">
+            <input type="hidden" name="complete_id" value="{{a_list.id}}">
         </form>
     </li>
 </ul>
@@ -89,7 +89,7 @@
 <h2 class="text-center">COMPLETED</h2>
 <ul class="list-group">
     {% for a_list in completed_tasks %}
-    <li class=""list-group-item>
+    <li class="list-group-item">
         <h5>
         {{a_list.name}}
         <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
