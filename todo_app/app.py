@@ -49,9 +49,9 @@ def doing_task(doing_id):
 
 
 # Completed
-@app.route("/completed/<id>", methods=["POST"])
-def completed_task(id):
-    completed_trello_task(id=request.form["completed_id"])
+@app.route("/completed_task/<completed_id>", methods=["POST"])
+def completed_task(completed_id):
+    completed_trello_task(completed_task=completed_id)
     return redirect(url_for("index"))
 
 

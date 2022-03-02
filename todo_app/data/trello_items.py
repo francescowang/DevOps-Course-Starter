@@ -61,9 +61,9 @@ def delete_trello_task(delete_task):
 
 
 # Not Started
-def not_started_trello_task(id):
+def not_started_trello_task(not_started_task):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?idList={doing_id}&key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{not_started_task}?idList={not_started_id}&key={key}&token={token}"
 
     headers = {"Accept": "application/json"}
 
@@ -82,9 +82,9 @@ def doing_trello_task(doing_task):
 
 
 # Completed
-def completed_trello_task(id):
+def completed_trello_task(completed_task):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?idList={completed_id}&key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{completed_task}?idList={completed_id}&key={key}&token={token}"
 
     headers = {"Accept": "application/json"}
 
