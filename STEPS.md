@@ -2,7 +2,7 @@
 
 **Module 1**
 
- - [ ] Close the repository
+ - [ ] Clone the repository
  - [ ] Delete .git file
  - [ ] Initialise a new repository
  - [ ] If your default shell is zsh, change it to bash
@@ -16,6 +16,7 @@
 
  - [ ] In the .env file, add a secret key
 ```
+# this prints out a random key, copy and paste it to your SECRET_KEY variable
 import os
 os.urandom(16)
 ```
