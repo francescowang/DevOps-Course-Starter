@@ -9,9 +9,9 @@ app.config.from_object(Config())
 
 @app.route("/", methods=["GET"])
 def index():
-    not_started_tasks = get_cards("not started")
-    doing_tasks = get_cards("doing")
-    completed_tasks = get_cards("completed")
+    not_started_tasks = get_cards("NOT STARTED")
+    doing_tasks = get_cards("DOING")
+    completed_tasks = get_cards("COMPLETED")
     return render_template(
         "index.html",
         not_started_tasks=not_started_tasks,
@@ -28,23 +28,23 @@ def add_task():
 
 
 # Delete
-@app.route("/delete/<id>", methods=["POST"])
-def delete_task(id):
-    delete_trello_task(id=request.form["delete_id"])
+@app.route("/delete_task/<delete_id>", methods=["POST"])
+def delete_task(delete_id):
+    delete_trello_task(delete_task=delete_id)
     return redirect(url_for("index"))
 
 
 # Not Started
-@app.route("/not_started_task/<id>", methods=["POST"])
-def not_started_task(id):
-    not_started_trello_task(id=request.form["not_started_id"])
+@app.route("/not_started_task/<not_started_id>", methods=["POST"])
+def not_started_task(not_started_id):
+    not_started_trello_task(not_started_task=not_started_id)
     return redirect(url_for("index"))
 
 
 # Doing
-@app.route("/doing_task/<id>", methods=["POST"])
-def doing_task(id):
-    doing_trello_task(id=request.form["doing_id"])
+@app.route("/doing_task/<doing_id>", methods=["POST"])
+def doing_task(doing_id):
+    doing_trello_task(doing_task=doing_id)
     return redirect(url_for("index"))
 
 

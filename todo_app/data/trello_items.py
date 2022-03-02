@@ -32,7 +32,7 @@ def get_cards(list_name):
 
     tasks = []
 
-    for a_list in result:  # a_lists refer to Not Started, Doing, Completed lists
+    for a_list in result:  # a_lists refer to NOT STARTED, DOING, COMPLETED lists in trello board
         if a_list["name"] == list_name:
             for card in a_list["cards"]:
                 task = Task.from_trello_card(card, list_name)
@@ -51,9 +51,9 @@ def add_trello_task(title):
 
 
 # Delete
-def delete_trello_task(id):
+def delete_trello_task(delete_task):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{delete_task}?key={key}&token={token}"
 
     headers = {"Accept": "application/json"}
 
@@ -63,7 +63,7 @@ def delete_trello_task(id):
 # Not Started
 def not_started_trello_task(id):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?item_idList={doing_id}&key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{id}?idList={doing_id}&key={key}&token={token}"
 
     headers = {"Accept": "application/json"}
 
@@ -71,9 +71,10 @@ def not_started_trello_task(id):
 
 
 # Doing
-def doing_trello_task(id):
+def doing_trello_task(doing_task):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?item_idList={doing_id}&key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{doing_task}?idList={doing_id}&key={key}&token={token}"
+    print(url_api)
 
     headers = {"Accept": "application/json"}
 
@@ -83,7 +84,7 @@ def doing_trello_task(id):
 # Completed
 def completed_trello_task(id):
 
-    url_api = f"https://api.trello.com/1/cards/{id}?item_idList={completed_id}&key={key}&token={token}"
+    url_api = f"https://api.trello.com/1/cards/{id}?idList={completed_id}&key={key}&token={token}"
 
     headers = {"Accept": "application/json"}
 
