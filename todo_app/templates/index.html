@@ -1,18 +1,129 @@
+<!DOCTYPE html>
+<html>
 {% extends "layout.html" %}
-{% block title %}To-Do App{% endblock %}
-
+{% block title %}Hacktivity App{% endblock %}
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4">To-Do App</h1>
-    <p class="lead">Just another to-do app.</p>
-  </div>
 
-  <div class="row">
-    <div class="col-md-12">
-      <h2>Items</h2>
-      <ul class="list-group mb-4">
-        <!-- List the todo items here -->
-      </ul>
-    </div>
-  </div>
+<!--Timer-->
+<iframe src="https://free.timeanddate.com/clock/i87qlgtn/n302/szw110/szh110/hoc000/hbw2/hfceee/cf100/hncccc/fdi76/mqc000/mql10/mqw4/mqd98/mhc000/mhl10/mhw4/mhd98/mmc000/mml10/mmw1/mmd98" frameborder="0" width="110" height="110"></iframe>
+
+
+<!-- <body onload="startTime()">
+    <div class="text-left" id="txt"></div>
+    <script>
+        function startTime() {
+        const today = new Date();
+        let h = today.getHours();
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =  h + ":" + m + ":" + s;
+        setTimeout(startTime, 1000);
+        }
+        
+        function checkTime(i) {
+        if (i < 10) {i = "0" + i};
+        return i;
+        }
+    </script>
+</body> -->
+
+
+<!--Buttons-->
+<div class="header">
+    <h2 class="text-center" class="display-4">One To-Do app to rule them all</h2>
+    <a class="btn btn-success btn-lg" href="https://bit.ly/3H6CCdV" role="button">YouTube</a>
+    <a class="btn btn-danger btn-lg" href="https://pomofocus.io/" role="button">Pomodoro Technique</a>
+    <a class="btn btn-info btn-lg" href="https://bit.ly/3n0ZhAc" role="button">Life Hacks</a>
+</div>
+
+
+<!--Not Started Tasks-->
+<h5 class="text-center">❌NOT STARTED❌</h5>
+<ul class="list-group">
+    {% for a_list in not_started_tasks %}
+    <li class="list-group-item">
+        <h5>
+        {{a_list.name}}
+        <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
+            <input type="hidden" name="delete_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/doing_task/{{a_list.id}}">
+            <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{a_list.id}}">
+            <input type="hidden" name="doing_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
+            <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{a_list.id}}">
+            <input type="hidden" name="complete_id" value="{{a_list.id}}">
+        </form>
+    </li>
+</ul>
+{% endfor %}
+
+
+<!--Doing Tasks Here-->
+<h5 class="text-center">👨‍💻DOING👨‍💻</h5>
+<ul class="list-group">
+    {% for a_list in doing_tasks %}
+    <li class="list-group-item">
+        <h5>
+        {{a_list.name}}
+        <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
+            <input type="hidden" name="delete_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/not_started_task/{{a_list.id}}">
+            <input type="submit" name="not started" class="btn-secondary" value="❌" data-source="{{a_list.id}}">
+            <input type="hidden" name="not_started_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/completed_task/{{a_list.id}}">
+            <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{a_list.id}}">
+            <input type="hidden" name="complete_id" value="{{a_list.id}}">
+        </form>
+    </li>
+</ul>
+{% endfor %}
+
+
+<!--Completed Tasks Here-->
+<h5 class="text-center">✅COMPLETED✅</h5>
+<ul class="list-group">
+    {% for a_list in completed_tasks %}
+    <li class="list-group-item">
+        <h5>
+        {{a_list.name}}
+        <form class="float-end" method="POST" action="/delete_task/{{a_list.id}}">
+            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
+            <input type="hidden" name="delete_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/not_started_task/{{a_list.id}}">
+            <input type="submit" name="not started" class="btn-secondary" value="❌" data-source="{{a_list.id}}">
+            <input type="hidden" name="not_started_id" value="{{a_list.id}}">
+        </form>
+        <form class="float-end" method="POST" action="/doing_task/{{a_list.id}}">
+            <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{a_list.id}}">
+            <input type="hidden" name="doing_id" value="{{a_list.id}}">
+        </form>
+    </li>
+</ul>
+{% endfor %}
+
+
+<!--Add Tasks Here-->
+</ul>
+<li<div class="container-fluid">
+<form action="/add_task", method="POST" class="form-control">
+    <div class=" class="form-control> </div>
+    <div align ="left">
+        <h3>Daily Tasks</h3>
+        <input type="text" class="col-lg-4 col-lg-offset-10" name="item_name" id="item_id" class=form-control required>
+        <p></p> <!--adding a space-->
+        <input type="submit" name="add" class="btn btn-outline-info" value="ADD A TASK">
+</form>
+</div>
+</li>
+</ul>
 {% endblock %}
+<html>

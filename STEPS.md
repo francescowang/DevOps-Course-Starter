@@ -1,5 +1,7 @@
 Steps
 
+Module 1
+
 Delete .git file
 
 change to bash
@@ -9,3 +11,7 @@ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poet
 poetry install
 
 cp .env.template .env
+
+Module 2
+
+poetry add requests
