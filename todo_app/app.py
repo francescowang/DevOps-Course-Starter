@@ -14,16 +14,22 @@ app = Flask(__name__)
 app.config.from_object(Config())
 
 
+class ViewApp:
+    def __init__(self, items):
+        self._items = items
+    
+    @property
+    def items(self):
+        return self._items
+    
+
 @app.route("/", methods=["GET"])
 def index():
-    not_started_tasks = get_cards("NOT STARTED")
-    doing_tasks = get_cards("DOING")
-    completed_tasks = get_cards("COMPLETED")
+    all_tasks = get_cards()
+    view_app = ViewApp(all_tasks)
     return render_template(
         "index.html",
-        not_started_tasks=not_started_tasks,
-        doing_tasks=doing_tasks,
-        completed_tasks=completed_tasks,
+        view_app = view_app
     )
 
 
