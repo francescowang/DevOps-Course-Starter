@@ -12,7 +12,7 @@ completed_id = os.environ.get("COMPLETED_ID")
 
 
 class Task:
-    def __init__(self, id, name, status="Not Started"):
+    def __init__(self, id, name, status): # status="Not Started"
         self.id = id
         self.name = name
         self.status = status
@@ -22,7 +22,7 @@ class Task:
         return cls(card["id"], card["name"], list_name)
 
 
-def get_cards(list_name):
+def get_cards():
     url_api = f"https://api.trello.com/1/boards/{board}/lists?key={key}&token={token}&cards=open"
     headers = {"Accept": "application/json"}
 
@@ -33,11 +33,9 @@ def get_cards(list_name):
     tasks = []
 
     for a_list in result:  # a_lists refer to NOT STARTED, DOING, COMPLETED lists in trello board
-        if a_list["name"] == list_name:
-            for card in a_list["cards"]:
-                task = Task.from_trello_card(card, list_name)
-
-                tasks.append(task)
+        for card in a_list["cards"]:
+            task = Task.from_trello_card(card, a_list["name"]) # calling all lists -> a_list["name"]
+            tasks.append(task)
     return tasks
 
 
