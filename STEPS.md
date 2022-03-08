@@ -50,3 +50,7 @@ NOT_STARTED_ID=
 DOING_ID=
 COMPLETED_ID=
 ```
+
+**Module 3**
+
+```poetry add pytest```
