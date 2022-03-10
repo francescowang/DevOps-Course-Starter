@@ -52,5 +52,7 @@ COMPLETED_ID=
 ```
 
 **Module 3**
+Install pytest module ```poetry add pytest```
+Create a .env.test file ```touch .env.test```
+Copy from the .env.template and provide "fake" details for testing purposes
 
-```poetry add pytest```
