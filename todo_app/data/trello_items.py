@@ -11,7 +11,8 @@ doing_id = os.environ.get("DOING_ID")
 completed_id = os.environ.get("COMPLETED_ID")
 
 
-class Task:
+class TaskStatus:
+    # does the parameter status also refer to "Doing" and "Completed"?
     def __init__(self, id, name, status): # status="Not Started"
         self.id = id
         self.name = name
@@ -34,7 +35,7 @@ def get_cards():
 
     for a_list in result:  # a_lists refer to NOT STARTED, DOING, COMPLETED lists in trello board
         for card in a_list["cards"]:
-            task = Task.from_trello_card(card, a_list["name"]) # calling all lists -> a_list["name"]
+            task = TaskStatus.from_trello_card(card, a_list["name"]) # calling all lists -> a_list["name"]
             tasks.append(task)
     return tasks
 
