@@ -8,7 +8,7 @@ from todo_app.data.trello_items import (
     completed_trello_task,
 )
 from todo_app.flask_config import Config
-from view_model import TaskViewModel
+from todo_app.view_model import TaskViewModel
 
 
 def create_app():
