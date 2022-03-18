@@ -12,12 +12,12 @@ class TaskViewModel:
 
     @property
     def not_started_items(self):
-        return [item for item in self._items if item.status == "Not Started"]
+        return [item for item in self._items if item.status == "NOT STARTED"]
 
     @property
     def doing_items(self):
-        return [item for item in self._items if item.status == "Doing"]
+        return [item for item in self._items if item.status == "DOING"]
 
     @property
     def completed_items(self):
-        return [item for item in self._items if item.status == "Completed"]
+        return [item for item in self._items if item.status == "COMPLETED"]
