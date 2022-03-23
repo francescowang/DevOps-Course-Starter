@@ -5,9 +5,9 @@ from todo_app.data.trello_items import TaskStatus
 def test_not_started_tasks():
     # Arrange
     items = [
-        TaskStatus("Task 1", "Code", "Not Started"),
-        TaskStatus("Task 2", "Sleep", "Doing"),
-        TaskStatus("Task 3", "Gym", "Completed")            
+        TaskStatus("Task 1", "Code", "NOT STARTED"),
+        TaskStatus("Task 2", "Sleep", "DOING"),
+        TaskStatus("Task 3", "Gym", "COMPLETED")            
     ]
 
     view_model = TaskViewModel(items)
@@ -21,9 +21,9 @@ def test_not_started_tasks():
 
 def test_doing_tasks():
     items = [
-        TaskStatus("Task 1", "Code", "Not Started"),
-        TaskStatus("Task 2", "Sleep", "Doing"),
-        TaskStatus("Task 3", "Gym", "Completed")  
+        TaskStatus("Task 1", "Code", "NOT STARTED"),
+        TaskStatus("Task 2", "Sleep", "DOING"),
+        TaskStatus("Task 3", "Gym", "COMPLETED")  
     ]
     
     view_model = TaskViewModel(items)
@@ -33,9 +33,9 @@ def test_doing_tasks():
 
 def test_completed_tasks():
     items = [
-        TaskStatus("Task 1", "Code", "Not Started"),
-        TaskStatus("Task 2", "Sleep", "Doing"),
-        TaskStatus("Task 3", "Gym", "Completed")  
+        TaskStatus("Task 1", "Code", "NOT STARTED"),
+        TaskStatus("Task 2", "Sleep", "DOING"),
+        TaskStatus("Task 3", "Gym", "COMPLETED")  
     ]
     
     view_model = TaskViewModel(items)
