@@ -22,7 +22,7 @@ def client():
 
 def test_index_page(monkeypatch, client):
     # Arrange
-    monkeypatch.setattr(requests, "get", get_lists_stub)
+    monkeypatch.setattr(requests, "request", get_lists_stub) # line 30 trello_items
 
     # Act
     response = client.get("/")
@@ -42,15 +42,17 @@ class StubResponse:
         return self.fake_response_data
 
 
-def get_lists_stub(url):
+def get_lists_stub(method, url, headers = {}):
     test_board_id = os.environ.get("BOARD_ID")
     fake_response_data = None
-    if url == f"https://api.trello.com/1/boards/{test_board_id}/lists":
+    print(url)
+    print(f"https://api.trello.com/1/boards/{test_board_id}/lists")
+    if url.startswith(f"https://api.trello.com/1/boards/{test_board_id}/lists"):
         fake_response_data = [
             {
                 "id": "XYZ789",
-                "name": "random task",
+                "name": "NOT STARTED",
                 "cards": [{"id": "789", "name": "test card"}],
             }
         ]
-    return StubResponse(fake_response_data)
+        return StubResponse(fake_response_data)
