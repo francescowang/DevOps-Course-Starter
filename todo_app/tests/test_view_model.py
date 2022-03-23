@@ -10,34 +10,39 @@ def test_not_started_tasks():
         TaskStatus("Task 3", "Gym", "COMPLETED")            
     ]
 
-    view_model = TaskViewModel(items)
-    
     # Act
+    view_model = TaskViewModel(items)
     not_started_tasks = view_model.not_started_items
 
     # Assert
-    assert len(view_model.not_started_items) == 1
+    assert len(not_started_tasks) == 1
 
 
 def test_doing_tasks():
+    # Arrange
     items = [
         TaskStatus("Task 1", "Code", "NOT STARTED"),
         TaskStatus("Task 2", "Sleep", "DOING"),
         TaskStatus("Task 3", "Gym", "COMPLETED")  
     ]
     
+    # Act
     view_model = TaskViewModel(items)
-
+    
+    # Assert
     assert len(view_model.doing_items) == 1
 
 
 def test_completed_tasks():
+    # Arrange
     items = [
         TaskStatus("Task 1", "Code", "NOT STARTED"),
         TaskStatus("Task 2", "Sleep", "DOING"),
         TaskStatus("Task 3", "Gym", "COMPLETED")  
     ]
     
+    # Act
     view_model = TaskViewModel(items)
-
+    
+    # Assert
     assert len(view_model.completed_items) == 1
