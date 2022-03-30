@@ -28,9 +28,10 @@ def test_doing_tasks():
     
     # Act
     view_model = TaskViewModel(items)
+    doing_tasks = view_model.doing_items
     
     # Assert
-    assert len(view_model.doing_items) == 1
+    assert len(doing_tasks) == 1
 
 
 def test_completed_tasks():
@@ -43,6 +44,7 @@ def test_completed_tasks():
     
     # Act
     view_model = TaskViewModel(items)
+    doing_tasks = view_model.doing_items
     
     # Assert
-    assert len(view_model.completed_items) == 1
+    assert len(doing_tasks) == 1
