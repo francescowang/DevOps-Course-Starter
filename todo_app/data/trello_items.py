@@ -2,8 +2,12 @@ import os
 import requests
 
 class TaskStatus:
-    # does the parameter status also refer to "Doing" and "Completed"?
-    def __init__(self, id, name, status): # status="Not Started"
+    """
+    The parameter status refer to "Not Started", "Doing" and "Completed".
+    The status is being taken from the name of the "list" in Trello, 
+    so it will be whatever column the card belongs to on your Trello board.
+    """
+    def __init__(self, id, name, status): # e.g. status="Not Started"
         self.id = id
         self.name = name
         self.status = status
