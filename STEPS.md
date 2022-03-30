@@ -71,3 +71,58 @@ Or cd into the directory:
 
 ```cd todo_app/tests```
 ```poetry run run pytest/<file that needs testing>```
+
+
+**Module 4**
+
+- [ ] Install ansible using homebrew
+
+```
+brew install ansible
+```
+
+https://formulae.brew.sh/formula/ansible
+
+or
+
+- [ ] Install ansible using pip in your .venv
+```
+pip install ansible
+```
+
+Run ```ansible --version``` to check if the installation succeeded
+You are now going to SSH from the Control Node into the Managed Node
+
+Note:
+- controller-ip-address is the Control Node 
+- host-ip-address is the Managed Node
+
+```
+ssh ec2-user@<controller-ip-address>
+```
+
+- [ ] Once logged in the Control Node, create an SSH key pair with this command
+```
+ssh-keygen
+```
+- [ ] Now enter the password one last time
+```
+ssh-copy-id ec2-user@<controller-ip-address>
+```
+
+- You are now logged in Control Node using SSH
+- You can end an SSH session with the command ```exit```
+
+Repeat the process for Managed Node by running the following commands and enter the password
+
+- [ ] ```ssh ec2-user@<host-ip-address>```
+- [ ] ```ssh-keygen```
+- [ ] ```ssh-copy-id ec2-user@<host-ip-address>```
+
+Go back to the project directory, you can now ssh into both nodes without the password
+Get into Controlled Node, then Managed Node and see the authorised keys
+
+```
+cat ~/.ssh/authorized_keys
+```
+
