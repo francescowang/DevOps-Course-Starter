@@ -126,3 +126,21 @@ Get into Controlled Node, then Managed Node and see the authorised keys
 cat ~/.ssh/authorized_keys
 ```
 
+- [ ] Install this extension -> Remote - SSH 
+- [ ] Command + shift N to open a new window
+- [ ] Click on the purple rectable bottom left and click on connect host
+- [ ] Enter the ec2-user@<controller-ip-address>
+- [ ] Create/Edit an inventory.ini file and playbook.yml file
+
+- [ ] Run the following commands:
+```
+ansible -i inventory.ini
+```
+```
+ansible franky-host -i inventory.ini -m ping
+```
+Run ```whoami``` to find out username of the current user when this command is invoked
+
+```
+ansible-playbook playbook.yml -i inventory.ini
+```
