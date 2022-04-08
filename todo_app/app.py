@@ -45,7 +45,3 @@ def create_app():
         trello_items.completed_trello_task(completed_task=completed_id)
         return redirect(url_for("index"))
     return app
-
-
-if __name__ == "__main__":
-    create_app.run()

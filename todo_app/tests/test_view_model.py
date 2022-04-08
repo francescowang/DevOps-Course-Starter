@@ -16,7 +16,8 @@ def test_not_started_tasks():
 
     # Assert
     assert len(not_started_tasks) == 1
-
+    item = not_started_tasks[0]
+    assert item.status == "NOT STARTED"
 
 def test_doing_tasks():
     # Arrange
@@ -32,6 +33,8 @@ def test_doing_tasks():
     
     # Assert
     assert len(doing_tasks) == 1
+    item = doing_tasks[0]
+    assert item.status == "DOING"
 
 
 def test_completed_tasks():
@@ -44,7 +47,9 @@ def test_completed_tasks():
     
     # Act
     view_model = TaskViewModel(items)
-    doing_tasks = view_model.doing_items
+    completed_tasks = view_model.completed_items
     
     # Assert
-    assert len(doing_tasks) == 1
+    assert len(completed_tasks) == 1
+    item = completed_tasks[0]
+    assert item.status == "COMPLETED"
