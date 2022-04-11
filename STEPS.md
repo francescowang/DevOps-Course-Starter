@@ -43,13 +43,14 @@ os.urandom(16)
 
 In the .env file, add the trello API keys and IDs. Login to Trello and use Postman to get started. E.g.
 ```
-SECRET_KEY=
+
 TRELLO_KEY=
 TOKEN_KEY=
 BOARD_ID=
 NOT_STARTED_ID=
 DOING_ID=
 COMPLETED_ID=
+
 ```
 
 **Module 3**
