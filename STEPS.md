@@ -43,10 +43,32 @@ os.urandom(16)
 
 In the .env file, add the trello API keys and IDs. Login to Trello and use Postman to get started. E.g.
 ```
+
 TRELLO_KEY=
 TOKEN_KEY=
 BOARD_ID=
 NOT_STARTED_ID=
 DOING_ID=
 COMPLETED_ID=
+
 ```
+
+**Module 3**
+Install pytest module ```poetry add pytest```
+Create a .env.test file ```touch .env.test```
+Copy from the .env.template and provide "fake" details for testing purposes
+
+**Testing the App**
+
+Run the following command from the parent directory:
+
+```poetry run pytest```
+
+If you wish to run only selected tests:
+
+```poetry run pytest todo_app/tests/<file that needs testing>```
+
+Or cd into the directory:
+
+```cd todo_app/tests```
+```poetry run run pytest/<file that needs testing>```
