@@ -2,11 +2,14 @@
   hosts: franky-host
   remote_user: ec2-user
   vars_prompt:
-    - name: secret_token
+    - name: secret_key
+      prompt: Enter the secret key
+      private: no
+    - name: trello_key
+      prompt: Enter the trello key
       private: no
     - name: trello_token
-      private: no
-    - name: token_token
+      prompt: Enter the trello token
       private: no
 
   tasks:
@@ -21,6 +24,7 @@
       state: latest
   - name: install poetry
     ansible.builtin.shell: curl -sSL https://install.python-poetry.org | python3 -
+    creates: /home/ec2-user/.local/bin/poetry
   - name: create a directory if it does not exist
     ansible.builtin.file:
       path: /opt/todoapp

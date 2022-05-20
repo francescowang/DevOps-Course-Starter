@@ -20,7 +20,7 @@ class TaskStatus:
 class TrelloItems:
     def __init__(self):
         self.key = os.environ.get("TRELLO_KEY")
-        self.token = os.environ.get("TOKEN_KEY")
+        self.token = os.environ.get("TRELLO_TOKEN")
         self.board = os.environ.get("BOARD_ID")
         self.not_started_id = os.environ.get("NOT_STARTED_ID")
         self.doing_id = os.environ.get("DOING_ID")

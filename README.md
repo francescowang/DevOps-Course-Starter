@@ -100,7 +100,7 @@ In the .env file, add the trello API keys and IDs. Login to Trello and use Postm
 ```
 SECRET_KEY=
 TRELLO_KEY=
-TOKEN_KEY=
+TRELLO_TOKEN=
 BOARD_ID=
 NOT_STARTED_ID=
 DOING_ID=
@@ -198,4 +198,32 @@ Run ```whoami``` to find out username of the current user when this command is i
 
 ```
 ansible-playbook playbook.yml -i inventory.ini
+```
+
+**Module 5**
+
+```
+poetry add gunicorn
+```
+
+```
+# building an image for development
+# it automatically adds colon and 'latest' if you just leave the name e.g. todoapp
+docker build --tag todoapp:dev . --target development
+# this is the command for the development in your localhost
+docker run --env-file .env -p 5001:5000 --volume $(pwd)/todo_app:/opt/todo_app todoapp:dev
+
+
+
+docker build --tag todoapp:prod . --target production
+# port 5000 is taken by airplay
+#running a container based on the todoapp:prod image
+docker run --env-file .env -it -p 5001:8000 todoapp:prod
+
+
+
+
+# for debugging
+<!-- docker run --entrypoint bash -it todoapp:dev -->
+<!-- docker run -it todoapp:prod -->
 ```
