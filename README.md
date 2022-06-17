@@ -9,7 +9,7 @@ The project uses poetry for Python to create an isolated environment and manage 
 ### Poetry installation (Bash)
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
+curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 ```
 
 ### Poetry installation (PowerShell)
@@ -29,7 +29,7 @@ $ poetry install
 You'll also need to clone a new `.env` file from the `.env.template` to store local configuration options. This is a one-time operation on first setup:
 
 ```bash
-$ cp .env.template .env  # (first time only)
+$ cp .env.template .env
 ```
 
 The `.env` file is used by flask to set environment variables when running `flask run`. This enables things like development mode (which also enables features like hot reloading when you make a file change). There's also a [SECRET_KEY](https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY) variable which is used to encrypt the flask session cookie.
@@ -53,48 +53,6 @@ You should see output similar to the following:
 ```
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
-## Steps
-
-**Module 1**
-
- - [ ] Clone the repository
- - [ ] Delete .git file or run ```git remote remove origin``` to unlink from the original project
- - [ ] Initialise a new repository if you deleted the .git file
- - [ ] If your default shell is zsh, change it to bash
- - [ ] Run these commands
-
-```curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -```
-
-```poetry install```
-
-```cp .env.template .env```
-
- - [ ] In the .env file, add a secret key
-```
-# this prints out a random key, copy and paste it to your SECRET_KEY variable
-import os
-os.urandom(16)
-```
- - [ ] In your settings.json file, add the following code snippet
-```
-{
-		"python.terminal.activateEnvironment":  true,
-		"python.terminal.activateEnvInCurrentTerminal":  true,
-		"python.defaultInterpreterPath":  "./.venv/bin/python",
-		"python.formatting.blackPath":  "black",
-		"editor.tabCompletion":  "on",
-		"workbench.colorCustomizations": {
-				"terminal.foreground"  :  "#10d52b",
-				"terminal.background"  :  "#000000",
-		},
-		"python.formatting.provider":  "black",
-		"python.linting.enabled":  true,
-}
-```
-
-**Module 2**
-
-```poetry add requests```
 
 In the .env file, add the trello API keys and IDs. Login to Trello and use Postman to get started. E.g.
 ```
@@ -107,12 +65,7 @@ DOING_ID=
 COMPLETED_ID=
 ```
 
-**Module 3**
-Install pytest module ```poetry add pytest```
-Create a .env.test file ```touch .env.test```
-Copy from the .env.template and provide "fake" details for testing purposes
-
-**Testing the App**
+# Testing the App
 
 Run the following command from the parent directory:
 
@@ -128,25 +81,9 @@ Or cd into the directory:
 ```poetry run run pytest/<file that needs testing>```
 
 
-**Module 4**
+# Ansible
 
-- [ ] Install ansible using homebrew
-
-```
-brew install ansible
-```
-
-https://formulae.brew.sh/formula/ansible
-
-or
-
-- [ ] Install ansible using pip in your .venv
-```
-pip install ansible
-```
-
-Run ```ansible --version``` to check if the installation succeeded
-You are now going to SSH from the Control Node into the Managed Node
+If you want to use ansible to deploy the application, make sure ansible is installed on the control node. Install it according to your operating system. 
 
 Note:
 - controller-ip-address is the Control Node 
@@ -156,11 +93,11 @@ Note:
 ssh ec2-user@<controller-ip-address>
 ```
 
-- [ ] Once logged in the Control Node, create an SSH key pair with this command
+- Once logged in the Control Node, create an SSH key pair with this command
 ```
 ssh-keygen
 ```
-- [ ] Now enter the password one last time
+- Now enter the password one last time
 ```
 ssh-copy-id ec2-user@<controller-ip-address>
 ```
@@ -170,9 +107,9 @@ ssh-copy-id ec2-user@<controller-ip-address>
 
 Repeat the process for Managed Node by running the following commands and enter the password
 
-- [ ] ```ssh ec2-user@<host-ip-address>```
-- [ ] ```ssh-keygen```
-- [ ] ```ssh-copy-id ec2-user@<host-ip-address>```
+- ```ssh ec2-user@<host-ip-address>```
+- ```ssh-keygen```
+- ```ssh-copy-id ec2-user@<host-ip-address>```
 
 Go back to the project directory, you can now ssh into both nodes without the password
 Get into Controlled Node, then Managed Node and see the authorised keys
@@ -181,13 +118,14 @@ Get into Controlled Node, then Managed Node and see the authorised keys
 cat ~/.ssh/authorized_keys
 ```
 
-- [ ] Install this extension -> Remote - SSH 
-- [ ] Command + shift N to open a new window
-- [ ] Click on the purple rectable bottom left and click on connect host
-- [ ] Enter the ec2-user@<controller-ip-address>
-- [ ] Create/Edit an inventory.ini file and playbook.yml file
+If you want to access the control node via Visual Studio Code, follow these steps: 
 
-- [ ] Run the following commands:
+- Install this extension -> Remote - SSH 
+- Command + shift N to open a new window
+- Click on the purple rectable bottom left and click on connect host
+- Enter the ec2-user@<controller-ip-address>
+- Create/Edit an inventory.ini file and playbook.yml file
+- Run the following commands for testing purposes:
 ```
 ansible -i inventory.ini
 ```
@@ -200,30 +138,33 @@ Run ```whoami``` to find out username of the current user when this command is i
 ansible-playbook playbook.yml -i inventory.ini
 ```
 
-**Module 5**
+# Running the app in Docker
 
-```
-poetry add gunicorn
-```
+If you want to run the application in Docker, you first need to build an image locally. 
+```docker build --tag todoapp:dev . --target development```
+Note: This command builds an image for development. It automatically adds colon and 'latest' if you just leave the name e.g. todoapp.
 
-```
-# building an image for development
-# it automatically adds colon and 'latest' if you just leave the name e.g. todoapp
-docker build --tag todoapp:dev . --target development
-# this is the command for the development in your localhost
-docker run --env-file .env -p 5001:5000 --volume $(pwd)/todo_app:/opt/todo_app todoapp:dev
+To run an image with the bind mount to allow hot realoding, use the following command:
 
+```docker run --env-file .env -p 5001:5000 --volume $(pwd)/todo_app:/opt/todo_app todoapp:dev```
 
+Note: port 5000 is taken by airplay
 
-docker build --tag todoapp:prod . --target production
-# port 5000 is taken by airplay
-#running a container based on the todoapp:prod image
-docker run --env-file .env -it -p 5001:8000 todoapp:prod
+Having said this, if you want to run the application in production on Docker, you first need to build an image. 
 
+```docker build --tag todoapp:prod . --target production```
 
+Running a container based on the todoapp:prod image
+```docker run --env-file .env -it -p 5001:8000 todoapp:prod```
+Note: port 8000 is the port that gunicorn uses
 
+## For debugging 
 
-# for debugging
-<!-- docker run --entrypoint bash -it todoapp:dev -->
-<!-- docker run -it todoapp:prod -->
-```
+It starts the app, it links my terminal to the container's terminal
+If you have problems within the container, you can just explore what's going on in the container
+
+```docker run --entrypoint bash -it todoapp:dev```
+
+# Architectural Diagram
+
+- Link the images
