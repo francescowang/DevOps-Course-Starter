@@ -19,4 +19,5 @@ EXPOSE 5000
 ENTRYPOINT poetry run gunicorn -b 0.0.0.0 "todo_app.app:create_app()"
 
 FROM base as test
-ENTRYPOINT [ "/opt/test.sh" ]
+ENTRYPOINT [ "poetry", "run", "pytest" ]
+
