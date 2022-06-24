@@ -202,28 +202,28 @@ ansible-playbook playbook.yml -i inventory.ini
 
 **Module 5**
 
-```
-poetry add gunicorn
-```
 
-```
-# building an image for development
-# it automatically adds colon and 'latest' if you just leave the name e.g. todoapp
-docker build --tag todoapp:dev . --target development
-# this is the command for the development in your localhost
-docker run --env-file .env -p 5001:5000 --volume $(pwd)/todo_app:/opt/todo_app todoapp:dev
+`poetry add gunicorn`
 
 
+Building an image for development. It automatically adds colon and 'latest' if you just leave the name e.g. todoapp.
 
-docker build --tag todoapp:prod . --target production
-# port 5000 is taken by airplay
-#running a container based on the todoapp:prod image
-docker run --env-file .env -it -p 5001:8000 todoapp:prod
+`docker build --tag todoapp:dev . --target development`
 
+This is the command for the development in your localhost.
 
+`docker run --env-file .env -p 5001:5000 --volume $(pwd)/todo_app:/opt/todo_app todoapp:dev`
 
+`docker build --tag todoapp:prod . --target production`
 
-# for debugging
-<!-- docker run --entrypoint bash -it todoapp:dev -->
-<!-- docker run -it todoapp:prod -->
-```
+Note:
+- port 5000 is taken by airplay
+- running a container based on the todoapp:prod image
+
+`docker run --env-file .env -it -p 5001:8000 todoapp:prod`
+
+For debugging
+
+`docker run --entrypoint bash -it todoapp:dev`
+
+`docker run -it todoapp:prod`
