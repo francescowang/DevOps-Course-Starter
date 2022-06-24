@@ -1,0 +1,14 @@
+.git
+.github
+.gitignore
+.pytest_cache
+.venv
+.env
+.env.dev
+.env.template
+env_vars.yml
+inventory.ini
+playbook.yml
+todoapp.service
+README.md
+Dockerfile
