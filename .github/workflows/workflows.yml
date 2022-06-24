@@ -5,6 +5,9 @@ jobs:
     name: Build the image and test it...
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: docker build --target test --tag test-image-v1 .
-    - run: docker run test-image-v1
+    - name: checkout stage
+      uses: actions/checkout@v3
+    - name: building the image
+      run: docker build --target test --tag test-image-v1 .
+    - name: running the test
+      run: docker run test-image-v1
