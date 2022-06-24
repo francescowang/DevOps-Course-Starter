@@ -1,0 +1,9 @@
+name: Continuous Integration
+on: [push]
+jobs:
+  build:
+    name: Build the image and test it...
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - run: echo Hello World
