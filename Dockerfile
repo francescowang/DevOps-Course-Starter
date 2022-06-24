@@ -1,10 +1,11 @@
 FROM python:3.10.2-slim-buster as base
-COPY . /opt/
-WORKDIR /opt
 RUN apt-get update && apt-get install curl -y
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+COPY poetry.lock poetry.toml pyproject.toml /opt/
+WORKDIR /opt
 ENV PATH=$PATH:/root/.poetry/bin
 RUN poetry install
+COPY . /opt/
 
 # you can make changes in localhost in docker
 # you don't need to rebuild a docker image
