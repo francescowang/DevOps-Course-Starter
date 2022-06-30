@@ -2,7 +2,7 @@ name: Continuous Integration / Continuous Deployment
 on:
   push:
     branches:
-    - module-7
+    - module-8
     paths-ignore:
     - '**.md'
   pull_request:
