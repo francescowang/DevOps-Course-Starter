@@ -13,12 +13,13 @@ FROM base as development
 EXPOSE 5000
 ENTRYPOINT poetry run flask run --host 0.0.0.0
 
+# this test stage is needed for continuous integration
+FROM base as test
+ENTRYPOINT [ "poetry", "run", "pytest" ]
+
+# this production stage is deliberately the final stage of this file, so that it's the default
 # you can make changes in production in docker
 # you have to rebuild the docker image
 FROM base as production
 EXPOSE 5000
 ENTRYPOINT poetry run gunicorn -b 0.0.0.0 "todo_app.app:create_app()"
-
-FROM base as test
-ENTRYPOINT [ "poetry", "run", "pytest" ]
-
