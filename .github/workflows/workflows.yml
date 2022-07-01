@@ -29,13 +29,13 @@ jobs:
     - run: echo 'Publishing...'
     - uses: actions/checkout@v2
 
-    - name: Build docker image...
-      run: docker build -t francescowang/module-8 .
-
     - name: Login to docker hub...
       run: echo ${{secrets.DOCKERHUB_TOKEN}} | docker login --username francescowang --password-stdin
-      
-    - name: Push image to docker hub..
+    
+    - name: Build docker image...
+      run: docker build -t francescowang/module-8 .
+    
+    - name: Push image to docker hub...
       run: docker push francescowang/module-8
 
   heroku:

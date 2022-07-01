@@ -22,4 +22,5 @@ ENTRYPOINT [ "poetry", "run", "pytest" ]
 # you have to rebuild the docker image
 FROM base as production
 EXPOSE 5000
-ENTRYPOINT poetry run gunicorn -b 0.0.0.0 "todo_app.app:create_app()"
+ENV PORT=80
+ENTRYPOINT poetry run gunicorn -b 0.0.0.0:$PORT "todo_app.app:create_app()"
