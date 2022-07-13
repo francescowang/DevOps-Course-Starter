@@ -51,3 +51,5 @@ jobs:
         heroku_app_name: 'corndel-module-8-exercise'
         heroku_email: "francesco.wang@kpmg.co.uk"
         usedocker: true
+    # - name: "Checking the status code of the homepage..."
+    #   run: curl -q https://corndel-module-8-exercise.herokuapp.com/

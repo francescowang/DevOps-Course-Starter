@@ -4,8 +4,8 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 COPY poetry.lock poetry.toml pyproject.toml /opt/
 WORKDIR /opt
 ENV PATH=$PATH:/root/.poetry/bin
-RUN poetry install
-COPY . /opt/
+RUN poetry config virtualenvs.create false --local && poetry install
+COPY todo_app /opt/todo_app
 
 # you can make changes in localhost in docker
 # you don't need to rebuild a docker image
@@ -20,7 +20,7 @@ ENTRYPOINT [ "poetry", "run", "pytest" ]
 # this production stage is deliberately the final stage of this file, so that it's the default
 # you can make changes in production in docker
 # you have to rebuild the docker image
-FROM base as production
+FROM base as prod
 EXPOSE 5000
 ENV PORT=80
-ENTRYPOINT poetry run gunicorn -b 0.0.0.0:$PORT "todo_app.app:create_app()"
+CMD poetry run gunicorn -b 0.0.0.0:$PORT "todo_app.app:create_app()"
