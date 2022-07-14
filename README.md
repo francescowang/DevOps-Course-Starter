@@ -152,13 +152,13 @@ Note: port 5000 is taken by airplay
 
 Having said this, if you want to run the application in production on Docker, you first need to build an image. 
 
-```docker build --tag todoapp:prod . --target production```
+```docker build --target prod --tag todoapp:prod .```
 
 Running a container based on the todoapp:prod image
 ```docker run --env-file .env -it -p 5001:8000 todoapp:prod```
 Note: port 8000 is the port that gunicorn uses
 
-## For debugging 
+## For debugging (running tests on Docker)
 
 It starts the app, it links my terminal to the container's terminal
 If you have problems within the container, you can just explore what's going on in the container
@@ -172,7 +172,31 @@ This runs the image for testing.
 ```docker run test-image-v1```
 
 # Architectural Diagram
+## Context Diagram
+<div align="center">
+<img src="diagrams/context-diagram.png">
+<p><strong>Figure:</strong> Context Diagram </p>
+</div>
 
-- Link the images
+## Container Diagram
+<div align="center">
+<img src="diagrams/container-diagram.png">
+<p><strong>Figure:</strong> Container Diagram </p>
+</div>
+
+## Component Diagram
+<div align="center">
+<img src="diagrams/component-diagram.png">
+<p><strong>Figure:</strong> Component Diagram </p>
+</div>
+
+
+## Accessing the live website
+
+This website is automatically pushed on the main brach and deployed to Heroku. It can be accessed via this link <https://corndel-module-8-exercise.herokuapp.com/>. 
+
+In case you have any unexpected issues, run this command `heroku logs --tail --app corndel-module-8-exercise` to find any bugs.
+Alternatively, you can login to Heroku > click on the project > more and view logs. 
+
 
 
