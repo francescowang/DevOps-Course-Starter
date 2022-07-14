@@ -16,6 +16,7 @@ ENTRYPOINT poetry run flask run --host 0.0.0.0
 # this test stage is needed for continuous integration
 FROM base as test
 ENTRYPOINT [ "poetry", "run", "pytest" ]
+COPY .env.test /opt/
 
 # this production stage is deliberately the final stage of this file, so that it's the default
 # you can make changes in production in docker
