@@ -165,6 +165,14 @@ If you have problems within the container, you can just explore what's going on 
 
 ```docker run --entrypoint bash -it todoapp:dev```
 
+This builds an image for testing.
+```docker build --target test --tag test-image-v1 .```
+
+This runs the image for testing.
+```docker run test-image-v1```
+
 # Architectural Diagram
 
 - Link the images
+
+

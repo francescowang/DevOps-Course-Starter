@@ -1,7 +1,7 @@
 .git
 .github
 .gitignore
-.pytest_cache
+**/.pytest_cache
 .venv
 .env
 .env.dev
@@ -12,3 +12,4 @@ playbook.yml
 todoapp.service
 README.md
 Dockerfile
+**/__pycache__
