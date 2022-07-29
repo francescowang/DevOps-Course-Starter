@@ -37,19 +37,7 @@ jobs:
     
     - name: Push image to docker hub...
       run: docker push francescowang/todoapp
+    
+    - name: Publish website...
+      run: curl -dH -X POST ${{secrets.WEBHOOK_URL}}
 
-  heroku:
-    name: Deploy to heroku...
-    runs-on: ubuntu-latest
-    needs: dockerhub
-    if: github.ref_name == 'module-9'
-    steps:
-    - uses: actions/checkout@v2
-    - uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API}}
-        heroku_app_name: 'corndel-module-8-exercise'
-        heroku_email: "francesco.wang@kpmg.co.uk"
-        usedocker: true
-    # - name: "Checking the status code of the homepage..."
-    #   run: curl -q https://corndel-module-8-exercise.herokuapp.com/

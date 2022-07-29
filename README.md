@@ -155,8 +155,8 @@ Having said this, if you want to run the application in production on Docker, yo
 ```docker build --target prod --tag todoapp:prod .```
 
 Running a container based on the todoapp:prod image
-```docker run --env-file .env -it -p 5001:8000 todoapp:prod```
-Note: port 8000 is the port that gunicorn uses
+```docker run --env-file .env -it -p 5000:80 todoapp:prod```
+Note: port 80 is the port that gunicorn uses
 
 ## For debugging (running tests on Docker)
 
