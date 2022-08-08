@@ -27,17 +27,17 @@ jobs:
     if: ${{ github.ref == 'refs/heads/module-9' }}
     steps:
     - run: echo 'Publishing...'
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: Login to docker hub...
       run: echo ${{ secrets.DOCKERHUB_TOKEN }} | docker login --username francescowang --password-stdin
     
     - name: Build docker image...
-      run: docker build -t francescowang/todoapp .
+      run: docker build --target prod -t francescowang/todoapp .
     
     - name: Push image to docker hub...
       run: docker push francescowang/todoapp
     
     - name: Publish website...
-      run: curl -dH -X POST ${{ secrets.WEBHOOK_URL }}
+      run: curl --fail -dH -X POST ${{ secrets.WEBHOOK_URL }}
 
