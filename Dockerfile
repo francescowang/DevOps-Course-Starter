@@ -1,8 +1,13 @@
+#  https://github.com/docker-library/python/blob/master/3.10/slim-buster/Dockerfile
 FROM python:3.10.2-slim-buster as base
+# apt-get update -> updates the package lists for upgrades for packages that need upgrading, 
+# as well as new packages that have just come to the repositories.
+# 
 RUN apt-get update && apt-get install curl -y
 RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
 COPY poetry.lock poetry.toml pyproject.toml /opt/
 WORKDIR /opt
+# /Users/fwang29/.poetry/bin or ~fwang29/.poetry/bin
 ENV PATH=$PATH:/root/.poetry/bin
 RUN poetry config virtualenvs.create false --local && poetry install
 COPY todo_app /opt/todo_app
