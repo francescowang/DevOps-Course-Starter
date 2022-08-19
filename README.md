@@ -171,32 +171,30 @@ This builds an image for testing.
 This runs the image for testing.
 ```docker run test-image-v1```
 
-# Architectural Diagram
-## Context Diagram
+
 <div align="center">
+<h2 style=color:tomato><b>Architectural Diagram</b></h2>
+</div>
+
+<div align="center">
+<h3 style=color:SkyBlue> <b>Context Diagram</b> </h3>
 <img src="diagrams/context-diagram.png">
-<p><strong>Figure:</strong> Context Diagram </p>
+<p> <strong> Figure: </strong> Context Diagram </p>
 </div>
 
-## Container Diagram
 <div align="center">
-<img src="diagrams/container-diagram.png">
-<p><strong>Figure:</strong> Container Diagram </p>
+<h3 style=color:SkyBlue> <b>Container Diagram</b> </h3>
+<img src="diagrams/context-diagram.png">
+<p> <strong> Figure: </strong> Container Diagram </p>
 </div>
 
-## Component Diagram
 <div align="center">
-<img src="diagrams/component-diagram.png">
-<p><strong>Figure:</strong> Component Diagram </p>
+<h3 style=color:SkyBlue> <b>Component Diagram</b> </h3>
+<img src="diagrams/context-diagram.png">
+<p> <strong> Figure: </strong> Component Diagram </p>
 </div>
 
 
 ## Accessing the live website
 
-This website is automatically pushed on the main brach and deployed to Heroku. It can be accessed via this link <https://corndel-module-8-exercise.herokuapp.com/>. 
-
-In case you have any unexpected issues, run this command `heroku logs --tail --app corndel-module-8-exercise` to find any bugs.
-Alternatively, you can login to Heroku > click on the project > more and view logs. 
-
-
-
+This website is automatically pushed on the main brach and deployed to Azure. It can be accessed via this link [FrankyToDo](https://frankytodo.azurewebsites.net).
