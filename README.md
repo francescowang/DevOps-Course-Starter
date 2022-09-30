@@ -1,5 +1,9 @@
 # DevOps Apprenticeship: Project Exercise
 
+<p align="left">
+  <a href="https://github.com/francescowang/DevOps-Course-Starter.git"><img alt="GitHub Actions Status" src="https://github.com/francescowang/DevOps-Course-Starter/actions/workflows/workflows.yml/badge.svg"></a>
+</p>
+
 > If you are using GitPod for the project exercise (i.e. you cannot use your local machine) then you'll want to launch a VM using the [following link](https://gitpod.io/#https://github.com/CorndelWithSoftwire/DevOps-Course-Starter). Note this VM comes pre-setup with Python & Poetry pre-installed.
 
 ## System Requirements
