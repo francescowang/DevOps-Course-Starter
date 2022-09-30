@@ -1,5 +1,6 @@
 import os
 import requests
+import pymongo
 
 class TaskStatus:
     """
@@ -15,6 +16,10 @@ class TaskStatus:
     @classmethod
     def from_trello_card(cls, card, list_name):
         return cls(card["id"], card["name"], list_name)
+    
+    @classmethod
+    def from_mongodb_card(cls, card):
+        return cls(card["_id"], card["name"], card["status"])
 
 
 class TrelloItems:
@@ -25,7 +30,8 @@ class TrelloItems:
         self.not_started_id = os.environ.get("NOT_STARTED_ID")
         self.doing_id = os.environ.get("DOING_ID")
         self.completed_id = os.environ.get("COMPLETED_ID")
-
+        self.connection_string = os.environ.get("CONNECTION_STRING")
+        self.mongodb = os.environ.get("MONGO_DB")
 
     def get_cards(self):
         url_api = f"https://api.trello.com/1/boards/{self.board}/lists?key={self.key}&token={self.token}&cards=open"
@@ -50,6 +56,15 @@ class TrelloItems:
         headers = {"Accept": "application/json"}
 
         response = requests.request("POST", url=url_api, headers=headers)
+
+        client = pymongo.MongoClient(self.connection_string)
+        db = client[self.mongodb]
+        collection = db.todo_collection
+        collection.insert_one({
+            "name": title,
+            "status": "NOT STARTED"
+        })
+
 
 
     # Delete
