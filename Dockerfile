@@ -4,11 +4,11 @@ FROM python:3.10.2-slim-buster as base
 # as well as new packages that have just come to the repositories.
 # 
 RUN apt-get update && apt-get install curl -y
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+RUN curl -sSL https://install.python-poetry.org | python3 -
 COPY poetry.lock poetry.toml pyproject.toml /opt/
 WORKDIR /opt
 # /Users/fwang29/.poetry/bin or ~fwang29/.poetry/bin
-ENV PATH=$PATH:/root/.poetry/bin
+ENV PATH=$PATH:/root/.local/bin
 RUN poetry config virtualenvs.create false --local && poetry install
 COPY todo_app /opt/todo_app
 
