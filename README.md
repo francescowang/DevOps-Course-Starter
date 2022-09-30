@@ -184,13 +184,13 @@ This runs the image for testing.
 
 <div align="center">
 <h3 style=color:SkyBlue> <b>Container Diagram</b> </h3>
-<img src="diagrams/context-diagram.png">
+<img src="diagrams/container-diagram.png">
 <p> <strong> Figure: </strong> Container Diagram </p>
 </div>
 
 <div align="center">
 <h3 style=color:SkyBlue> <b>Component Diagram</b> </h3>
-<img src="diagrams/context-diagram.png">
+<img src="diagrams/component-diagram.png">
 <p> <strong> Figure: </strong> Component Diagram </p>
 </div>
 
