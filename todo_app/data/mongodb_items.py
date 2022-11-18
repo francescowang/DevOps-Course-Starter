@@ -1,6 +1,6 @@
 import os
 import pymongo
-from todo_app.data.trello_items import TaskStatus
+from todo_app.data.item_status import TaskStatus
 from bson import ObjectId
 
 

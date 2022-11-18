@@ -19,16 +19,19 @@ def client():
 
 def test_index_page(client):
     # Arrange
-    # monkeypatch.setattr(requests, "request", get_lists_stub) # line 30 trello_items
-
     MongoDB_Items().add_mongo_card("test card")
-        
-
+    
     # Act
     response = client.get("/")
-
+    
     # Assert
     assert response.status_code == 200
     assert "test card" in response.data.decode()
 
 
+"""
+Tests
+Adding new items
+Deleting new items
+Marking items as 'doing' or 'completed' or moving the item back to 'not started'
+"""
