@@ -4,11 +4,10 @@
   <a href="https://github.com/francescowang/DevOps-Course-Starter.git"><img alt="GitHub Actions Status" src="https://github.com/francescowang/DevOps-Course-Starter/actions/workflows/workflows.yml/badge.svg"></a>
 </p>
 
-> If you are using GitPod for the project exercise (i.e. you cannot use your local machine) then you'll want to launch a VM using the [following link](https://gitpod.io/#https://github.com/CorndelWithSoftwire/DevOps-Course-Starter). Note this VM comes pre-setup with Python & Poetry pre-installed.
 
 ## System Requirements
 
-The project uses poetry for Python to create an isolated environment and manage package dependencies. To prepare your system, ensure you have an official distribution of Python version 3.7+ and install Poetry using one of the following commands (as instructed by the [poetry documentation](https://python-poetry.org/docs/#system-requirements)):
+The project uses poetry for Python to create an isolated environment and manage package dependencies. To prepare your system, ensure you have an official distribution of Python version 3.9+ and install Poetry using one of the following commands (as instructed by the [poetry documentation](https://python-poetry.org/docs/#system-requirements)):
 
 ### Poetry installation (Bash)
 
@@ -69,7 +68,7 @@ DOING_ID=
 COMPLETED_ID=
 ```
 
-# Testing the App
+## Testing the App
 
 Run the following command from the parent directory:
 
@@ -85,7 +84,7 @@ Or cd into the directory:
 ```poetry run run pytest/<file that needs testing>```
 
 
-# Ansible
+## Ansible
 
 If you want to use ansible to deploy the application, make sure ansible is installed on the control node. Install it according to your operating system. 
 
@@ -130,22 +129,17 @@ If you want to access the control node via Visual Studio Code, follow these step
 - Enter the ec2-user@<controller-ip-address>
 - Create/Edit an inventory.ini file and playbook.yml file
 - Run the following commands for testing purposes:
-```
-ansible -i inventory.ini
-```
-```
-ansible franky-host -i inventory.ini -m ping
-```
-Run ```whoami``` to find out username of the current user when this command is invoked
+  - `ansible -i inventory.ini`
+  - `ansible franky-host -i inventory.ini -m ping`
+- Run ```whoami``` to find out username of the current user when this command is invoked
+  - `ansible-playbook playbook.yml -i inventory.ini`
 
-```
-ansible-playbook playbook.yml -i inventory.ini
-```
-
-# Running the app in Docker
+## Running the app in Docker
 
 If you want to run the application in Docker, you first need to build an image locally. 
+
 ```docker build --tag todoapp:dev . --target development```
+
 Note: This command builds an image for development. It automatically adds colon and 'latest' if you just leave the name e.g. todoapp.
 
 To run an image with the bind mount to allow hot realoding, use the following command:
@@ -159,20 +153,23 @@ Having said this, if you want to run the application in production on Docker, yo
 ```docker build --target prod --tag todoapp:prod .```
 
 Running a container based on the todoapp:prod image
+
 ```docker run --env-file .env -it -p 5000:80 todoapp:prod```
+
 Note: port 80 is the port that gunicorn uses
 
-## For debugging (running tests on Docker)
+## Debugging Docker
 
-It starts the app, it links my terminal to the container's terminal
-If you have problems within the container, you can just explore what's going on in the container
+If you have problems within the container, you can investigate what's going on in the container.
 
 ```docker run --entrypoint bash -it todoapp:dev```
 
 This builds an image for testing.
+
 ```docker build --target test --tag test-image-v1 .```
 
 This runs the image for testing.
+
 ```docker run test-image-v1```
 
 
