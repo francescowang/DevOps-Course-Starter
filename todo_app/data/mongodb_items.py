@@ -11,35 +11,25 @@ class MongoDB_Items:
         mongodb = os.environ.get("MONGO_DB")
         client = pymongo.MongoClient(connection_string)
         db = client[mongodb]
-        
         self.collection = db.todo_collection
-
-
-
+    
     def get_mongo_cards(self):
         return [TaskStatus.from_mongodb_card(card) for card in self.collection.find()]
     
-    # title of the task
     def add_mongo_card(self, title):
         self.collection.insert_one({
             "name": title,
             "status": "NOT STARTED"
         })
     
-    # id of the task
     def delete_mongo_card(self, id):
-        # self.collection.delete_one(
-
-        # )
-        # items = { "address": "Mountain 21" }
+        
         queries = { 
                 "_id": ObjectId(id)
         }
         print(type(queries))
         self.collection.delete_one(queries)
 
-    # id refers to the id of the task
-    # func updates the status of the task
     def not_started_mongo_card(self, id):
         
         query = {
@@ -61,7 +51,7 @@ class MongoDB_Items:
             
         }
         self.collection.update_one(query, new_query)
-
+    
     def completed_mongo_card(self, id):
         
         query = {
