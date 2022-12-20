@@ -29,7 +29,7 @@ class MongoDB_Items:
         }
         print(type(queries))
         self.collection.delete_one(queries)
-
+    
     def not_started_mongo_card(self, id):
         
         query = {
