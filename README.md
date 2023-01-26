@@ -57,17 +57,6 @@ You should see output similar to the following:
 Now visit [`http://localhost:5000/`](http://localhost:5000/) in your web browser to view the app.
 
 
-In the .env file, add the trello API keys and IDs. Login to Trello and use Postman to get started. E.g.
-```
-SECRET_KEY=
-TRELLO_KEY=
-TRELLO_TOKEN=
-BOARD_ID=
-NOT_STARTED_ID=
-DOING_ID=
-COMPLETED_ID=
-```
-
 ## Testing the App
 
 Run the following command from the parent directory:
@@ -81,6 +70,7 @@ If you wish to run only selected tests:
 Or cd into the directory:
 
 ```cd todo_app/tests```
+
 ```poetry run run pytest/<file that needs testing>```
 
 
