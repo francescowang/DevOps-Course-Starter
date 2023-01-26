@@ -1,13 +1,25 @@
+import os
 from flask import Flask, request, render_template, redirect, url_for
 from todo_app.flask_config import Config
 from todo_app.view_model import TaskViewModel
 from todo_app.data.mongodb_items import MongoDB_Items
+from flask_login import LoginManager
+
 
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config())
     mongo_items = MongoDB_Items()
+    login_manager = LoginManager()
+    
+    # @login_manager.unauthorized_handler
+    # def unauthenticated():
+    #     return redirect(f"https://github.com/login/oauth/authorize?client_id={os.environ.get('CLIENT_ID')}")
+    # @login_manager.user_loader
+    # def load_user(user_id):
+    #     return User(user_id)
+    # login_manager.init_app(app)
     
     @app.route("/", methods=["GET"])
     def index():
