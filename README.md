@@ -189,3 +189,30 @@ This runs the image for testing.
 ## Accessing the live website
 
 This website is automatically pushed on the main brach and deployed to Azure. It can be accessed via this link [FrankyToDo](https://frankytodo.azurewebsites.net).
+
+## Deploy the web app to Microsoft Azure
+
+Login to [Azure](https://login.microsoftonline.com/).
+
+or
+
+Login via `azure cli`. You can install it from [here](https://learn.microsoft.com/en-us/cli/azure/).
+
+The Azure Portal provides a nice GUI of all the available options, however it is a very manual process. While the CLI is easier to automate, it can be more complicated than the Portal. Therefore, we are going to use the CLI.
+
+```bash
+az appservice plan create -g <resource-group-name> -n <service-app-plan> --sku <B2> --is-linux
+```
+
+
+```bash
+az webapp create -g <resource-group-name> --plan <service-app-plan> --name <unique-web-app-name> --deployment-container-image-name <docker hub your-username/image-name:latest>
+```
+
+```bash
+az webapp config appsettings set -g <resource_group_name> -n <unique-webapp-name> --settings FLASK_APP=todo_app/app.
+```
+
+Navigate to http://<unique-web-app-name>.azurewebsites.net/
+
+> Read more about this command [here](https://learn.microsoft.com/en-us/cli/azure/appservice/plan?view=azure-cli-latest).
