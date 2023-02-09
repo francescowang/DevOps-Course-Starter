@@ -28,24 +28,24 @@ def create_app():
     def callback():
         url = "https://github.com/login/oauth/access_token"
         code = request.args["code"]
-        params = {"client_id":os.getenv("CLIENT_ID"), "client_secret":os.getenv("CLIENT_SECRET"), "code":code }
-        header = {"Accept": "application/json"}
         
+        params = {
+            "client_id":os.getenv("CLIENT_ID"), 
+            "client_secret":os.getenv("CLIENT_SECRET"), 
+            "code":code }
+        header = {"Accept": "application/json"}
         response = requests.post(url, params=params, headers=header)
-        print(response.text)
         oauth_token = response.json()["access_token"]
         
-        # response = requests.post(url, params=params, headers=header)
-        # body = response.json()
-        # print(body)
-        # oauth_token = body["franky-to-do-app"]
-        
         api_url = "https://api.github.com/user"
-        api_header = {"Accept":"application/vnd.github+json", "Authorization": f"Bearer {oauth_token}"}
+        api_header = {
+            "Accept":"application/vnd.github+json",
+            "Authorization": f"Bearer {oauth_token}"}
         user_id = requests.get(api_url, headers=api_header).json()["id"]
+        
         user = User(user_id)
         login_user(user)
-        return redirect("/")
+        return redirect(url_for("index"))
 
     def user_authorisation(fname):
         @wraps(fname)
@@ -58,6 +58,7 @@ def create_app():
     
     @app.route("/", methods=["GET"])
     @login_required
+    @user_authorisation
     def index():
         all_tasks = mongo_items.get_mongo_cards()
         task_view_model = TaskViewModel(all_tasks)
@@ -65,30 +66,35 @@ def create_app():
     
     @app.route("/add_task", methods=["POST"])
     @login_required
+    @user_authorisation
     def add_task():
         mongo_items.add_mongo_card(title=request.form.get("item_name"))
         return redirect(url_for("index"))
     
     @app.route("/delete_task/<delete_id>", methods=["POST"])
     @login_required
+    @user_authorisation
     def delete_task(delete_id):
         mongo_items.delete_mongo_card(delete_id)
         return redirect(url_for("index"))
     
     @app.route("/not_started_task/<not_started_id>", methods=["POST"])
     @login_required
+    @user_authorisation
     def not_started_task(not_started_id):
         mongo_items.not_started_mongo_card(id=not_started_id)
         return redirect(url_for("index"))
     
     @app.route("/doing_task/<doing_id>", methods=["POST"])
     @login_required
+    @user_authorisation
     def doing_task(doing_id):
         mongo_items.doing_mongo_card(doing_id)
         return redirect(url_for("index"))
     
     @app.route("/completed_task/<completed_id>", methods=["POST"])
     @login_required
+    @user_authorisation
     def completed_task(completed_id):
         mongo_items.completed_mongo_card(id=completed_id)
         return redirect(url_for("index"))
