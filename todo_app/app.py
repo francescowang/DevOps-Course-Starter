@@ -41,8 +41,8 @@ def create_app():
         api_header = {
             "Accept":"application/vnd.github+json",
             "Authorization": f"Bearer {oauth_token}"}
-        user_id = requests.get(api_url, headers=api_header).json()["id"]
-        
+        user_id = str(requests.get(api_url, headers=api_header).json()["id"])
+        # print(user_id) # gets user id
         user = User(user_id)
         login_user(user)
         return redirect(url_for("index"))

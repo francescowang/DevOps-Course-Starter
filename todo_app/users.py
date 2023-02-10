@@ -9,9 +9,15 @@ class User(UserMixin):
     def get_id(self):
         return self.user_id
     
+
+    
     @property
     def role(self):
-        if self.user_id == int(os.environ.get("ADMIN_ID")):
+        print(self.user_id)
+        print(os.environ.get("ADMIN_ID"))
+        if self.user_id == os.environ.get("ADMIN_ID"):
             return "admin"
+        elif self.user_id == os.environ.get("WRITER_ID"):
+            return "writer"
         else:
             return "reader"
