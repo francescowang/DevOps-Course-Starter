@@ -37,13 +37,13 @@ resource "azurerm_linux_web_app" "main" {
         "FLASK_APP"                  = var.flask_app
         "FLASK_ENV"                  = var.flask_env
         "SECRET_KEY"                 = var.secret_key
-        "TASKS_COLLECTION_NAME"      = var.tasks_collection_name
-        "TASKS_DB_NAME"              = var.tasks_db_name
+        # "TASKS_COLLECTION_NAME"      = var.tasks_collection_name
+        # "TASKS_DB_NAME"              = var.tasks_db_name
 }
 
     site_config {
         application_stack {
-        docker_image     = "francescowang/to-do-app"
+        docker_image     = "francescowang/todoapp"
         docker_image_tag = "latest"
     }
 }
