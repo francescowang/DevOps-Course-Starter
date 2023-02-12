@@ -1,14 +1,18 @@
-import os, requests, logging
+import os
+import requests
+import logging
+from functools import wraps
+
 from flask import Flask, request, render_template, redirect, url_for
+from flask_login import LoginManager, login_required, login_user, current_user
+
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
+
 from todo_app.flask_config import Config
 from todo_app.view_model import TaskViewModel
 from todo_app.data.mongodb_items import MongoDB_Items
 from todo_app.users import User
-from flask_login import LoginManager, login_required, login_user, current_user
-from functools import wraps
-from loggly.handlers import HTTPSHandler
-from logging import Formatter
-
 
 
 def create_app():
