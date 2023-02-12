@@ -1,4 +1,4 @@
-import os, requests
+import os, requests, logging
 from flask import Flask, request, render_template, redirect, url_for
 from todo_app.flask_config import Config
 from todo_app.view_model import TaskViewModel
@@ -6,6 +6,8 @@ from todo_app.data.mongodb_items import MongoDB_Items
 from todo_app.users import User
 from flask_login import LoginManager, login_required, login_user, current_user
 from functools import wraps
+from loggly.handlers import HTTPSHandler
+from logging import Formatter
 
 
 
@@ -14,6 +16,18 @@ def create_app():
     app.config.from_object(Config())
     mongo_items = MongoDB_Items()
     login_manager = LoginManager()
+    
+    # Logs
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.DEBUG)
+    text_formatter = logging.Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s")
+    console_handler.setFormatter(text_formatter)
+    app.logger.addHandler(console_handler)
+    app.logger.setLevel(app.config['LOG_LEVEL'])
+    if app.config["LOGGLY_TOKEN"] is not None:
+        handler = HTTPSHandler(f"https://logs-01.loggly.com/inputs/{app.config['LOGGLY_TOKEN']}/tag/todoapp")
+        handler.setFormatter(Formatter("[%(asctime)s] %(levelname)s in %(module)s: %(message)s"))
+        app.logger.addHandler(handler)
     
     
     @login_manager.unauthorized_handler
