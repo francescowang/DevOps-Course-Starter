@@ -1,5 +1,5 @@
 import os, requests
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, current_app
 from todo_app.flask_config import Config
 from todo_app.view_model import TaskViewModel
 from todo_app.data.mongodb_items import MongoDB_Items
@@ -19,6 +19,7 @@ def create_app():
     @login_manager.unauthorized_handler
     def unauthenticated():
         return redirect(f"https://github.com/login/oauth/authorize?client_id={os.environ.get('CLIENT_ID')}")
+        
     @login_manager.user_loader
     def load_user(user_id):
         return User(user_id)
@@ -50,7 +51,7 @@ def create_app():
     def user_authorisation(fname):
         @wraps(fname)
         def decorator(*args, **kwargs):
-            if current_user.role == "admin":
+            if current_app.config['LOGIN_DISABLED'] == 'True' or current_user.role == "admin":
                 return fname(*args, **kwargs)
             else:
                 return render_template("user_unathorisation.html"), 403
