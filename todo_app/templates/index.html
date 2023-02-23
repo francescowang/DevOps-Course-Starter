@@ -20,22 +20,24 @@
 <!--Not Started Tasks-->
 <h5 class="text-center">❌NOT STARTED❌</h5>
 <ul class="list-group">
-    {% for card in task_view_model.not_started_items %} <!-- line 14 from view_model, we're calling each card in not started list -->
+    {% for card in task_view_model.not_started_items %}
     <li class="list-group-item">
         <h5>
         {{card.name}}
-        <form class="float-end" method="POST" action="/delete_task/{{card.id}}">
-            <input type="submit" name="delete" class="btn-secondary" value="🗑️">
-            <input type="hidden" name="delete_id" value="{{card.id}}">
-        </form>
-        <form class="float-end" method="POST" action="/doing_task/{{card.id}}">
-            <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{card.id}}">
-            <input type="hidden" name="doing_id" value="{{card.id}}">
-        </form>
-        <form class="float-end" method="POST" action="/completed_task/{{card.id}}">
-            <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{card.id}}">
-            <input type="hidden" name="complete_id" value="{{card.id}}">
-        </form>
+        {% if is_admin %}
+            <form class="float-end" method="POST" action="/delete_task/{{card.id}}">
+                <input type="submit" name="delete" class="btn-secondary" value="🗑️">
+                <input type="hidden" name="delete_id" value="{{card.id}}">
+            </form>
+            <form class="float-end" method="POST" action="/doing_task/{{card.id}}">
+                <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{card.id}}">
+                <input type="hidden" name="doing_id" value="{{card.id}}">
+            </form>
+            <form class="float-end" method="POST" action="/completed_task/{{card.id}}">
+                <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{card.id}}">
+                <input type="hidden" name="complete_id" value="{{card.id}}">
+            </form>
+        {% endif %}
     </li>
 </ul>
 {% endfor %}
@@ -48,6 +50,7 @@
     <li class="list-group-item">
         <h5>
         {{card.name}}
+        {% if is_admin %}
         <form class="float-end" method="POST" action="/delete_task/{{card.id}}">
             <input type="submit" name="delete" class="btn-secondary" value="🗑️">
             <input type="hidden" name="delete_id" value="{{card.id}}">
@@ -60,6 +63,7 @@
             <input type="submit" name="completed" class="btn-secondary" value="✅" data-source="{{card.id}}">
             <input type="hidden" name="complete_id" value="{{card.id}}">
         </form>
+        {% endif %}
     </li>
 </ul>
 {% endfor %}
@@ -72,6 +76,7 @@
     <li class="list-group-item">
         <h5>
         {{card.name}}
+        {% if is_admin %}
         <form class="float-end" method="POST" action="/delete_task/{{card.id}}">
             <input type="submit" name="delete" class="btn-secondary" value="🗑️">
             <input type="hidden" name="delete_id" value="{{card.id}}">
@@ -84,6 +89,7 @@
             <input type="submit" name="doing" class="btn-secondary" value="👨‍💻" data-source="{{card.id}}">
             <input type="hidden" name="doing_id" value="{{card.id}}">
         </form>
+        {% endif %}
     </li>
 </ul>
 {% endfor %}
