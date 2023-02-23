@@ -48,7 +48,7 @@ def create_app():
         login_user(user)
         return redirect(url_for("index"))
 
-    def user_authorisation(fname):
+    def admin_authorisation_required(fname):
         @wraps(fname)
         def decorator(*args, **kwargs):
             if current_app.config['LOGIN_DISABLED'] == 'True' or current_user.role == "admin":
@@ -59,43 +59,43 @@ def create_app():
     
     @app.route("/", methods=["GET"])
     @login_required
-    @user_authorisation
     def index():
         all_tasks = mongo_items.get_mongo_cards()
         task_view_model = TaskViewModel(all_tasks)
-        return render_template("index.html", task_view_model=task_view_model)
+        is_admin = current_app.config['LOGIN_DISABLED'] == 'True' or current_user.role == "admin"
+        return render_template("index.html", task_view_model=task_view_model, is_admin = is_admin)
     
     @app.route("/add_task", methods=["POST"])
     @login_required
-    @user_authorisation
+    @admin_authorisation_required
     def add_task():
         mongo_items.add_mongo_card(title=request.form.get("item_name"))
         return redirect(url_for("index"))
     
     @app.route("/delete_task/<delete_id>", methods=["POST"])
     @login_required
-    @user_authorisation
+    @admin_authorisation_required
     def delete_task(delete_id):
         mongo_items.delete_mongo_card(delete_id)
         return redirect(url_for("index"))
     
     @app.route("/not_started_task/<not_started_id>", methods=["POST"])
     @login_required
-    @user_authorisation
+    @admin_authorisation_required
     def not_started_task(not_started_id):
         mongo_items.not_started_mongo_card(id=not_started_id)
         return redirect(url_for("index"))
     
     @app.route("/doing_task/<doing_id>", methods=["POST"])
     @login_required
-    @user_authorisation
+    @admin_authorisation_required
     def doing_task(doing_id):
         mongo_items.doing_mongo_card(doing_id)
         return redirect(url_for("index"))
     
     @app.route("/completed_task/<completed_id>", methods=["POST"])
     @login_required
-    @user_authorisation
+    @admin_authorisation_required
     def completed_task(completed_id):
         mongo_items.completed_mongo_card(id=completed_id)
         return redirect(url_for("index"))
