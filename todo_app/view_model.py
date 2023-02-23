@@ -1,5 +1,5 @@
 from typing import List
-from todo_app.data.trello_items import TaskStatus
+from todo_app.data.item_status import TaskStatus
 
 
 class TaskViewModel:

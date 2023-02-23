@@ -1,5 +1,5 @@
 from todo_app.view_model import TaskViewModel
-from todo_app.data.trello_items import TaskStatus
+from todo_app.data.item_status import TaskStatus
 
 
 def test_not_started_tasks():
@@ -9,15 +9,16 @@ def test_not_started_tasks():
         TaskStatus("Task 2", "Sleep", "DOING"),
         TaskStatus("Task 3", "Gym", "COMPLETED")            
     ]
-
+    
     # Act
     view_model = TaskViewModel(items)
     not_started_tasks = view_model.not_started_items
-
+    
     # Assert
     assert len(not_started_tasks) == 1
     item = not_started_tasks[0]
     assert item.status == "NOT STARTED"
+
 
 def test_doing_tasks():
     # Arrange
