@@ -16,7 +16,7 @@ jobs:
     - name: building the image
       run: docker build --target test --tag test-image-v1 .
     - name: running the test
-      run: docker run test-image-v1
+      run: docker run --env-file .env.test test-image-v1 
 
   dockerhub:
     name: Build an image to docker hub...
